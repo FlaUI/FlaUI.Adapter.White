@@ -4,3 +4,13 @@
 # Build Results
 bin/
 obj/
+
+# Cake
+.cake/*
+!.cake/packages.config
+
+# Nuget Packages
+**/packages/*
+
+# Artifacts
+artifacts/
