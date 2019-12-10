@@ -19,10 +19,11 @@
     <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation White Adapter FlaUI</PackageTags>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FlaUI.Core" Version="3.0.0-rc.1" />
+    <PackageReference Include="FlaUI.Core" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Additional nuget files">

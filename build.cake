@@ -61,6 +61,42 @@ Task("Build")
     Zip(artifactDir, artifactDir.CombineWithFilePath("BuildLog.zip"), new [] { buildLogFile });
 });
 
+Task("Push-To-Nuget")
+    .Does(() =>
+{
+    var apiKey = System.IO.File.ReadAllText(".nugetapikey");
+
+    // Get the paths to the packages
+    var packages = GetFiles($"{artifactDir}/*.nupkg");
+
+    // Push the packages
+    foreach (var package in packages) {
+        Information($"Pushing {package}");
+        NuGetPush(package, new NuGetPushSettings {
+            Source = "https://nuget.org/api/v2/package",
+            ApiKey = apiKey
+        });
+    }
+});
+
+ Task("Push-To-SymbolSource")
+    .Does(() =>
+{
+    var apiKey = System.IO.File.ReadAllText(".nugetapikey");
+
+    // Get the paths to the packages
+    var packages = GetFiles($"{artifactDir}/*.snupkg");
+
+    // Push the packages
+    foreach (var package in packages) {
+        Information($"Pushing {package}");
+        NuGetPush(package, new NuGetPushSettings {
+            Source = "https://nuget.smbsrc.net",
+            ApiKey = apiKey
+        });
+    }
+ });
+
 Task("Default")
     .Does(() => {
     Information("Hello Cake!");

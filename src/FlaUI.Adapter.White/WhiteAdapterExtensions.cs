@@ -1,4 +1,6 @@
-﻿using FlaUI.Core.AutomationElements;
+﻿using System.Linq;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
@@ -13,9 +15,34 @@ namespace FlaUI.Adapter.White
             return Get<T>(element, element.ConditionFactory.ByName(name));
         }
 
+        public static T Get<T>(this AutomationElement element, SearchCriteria searchCriteria) where T : AutomationElement
+        {
+            return Get(element, searchCriteria).As<T>();
+        }
+
         public static T Get<T>(this AutomationElement element, ConditionBase condition) where T : AutomationElement
         {
-            var foundElement = element.FindFirstDescendant(condition).As<T>();
+            return Get(element, condition).As<T>();
+        }
+
+        public static AutomationElement Get(this AutomationElement element, SearchCriteria searchCriteria)
+        {
+            var condition = searchCriteria.ToCondition();
+            if (searchCriteria.IsIndexed)
+            {
+                var allItems = element.FindAllDescendants(condition);
+                if (allItems.Length >= searchCriteria.Index)
+                {
+                    return allItems[searchCriteria.Index];
+                }
+                return null;
+            }
+            return Get(element, condition);
+        }
+
+        public static AutomationElement Get(this AutomationElement element, ConditionBase condition)
+        {
+            var foundElement = element.FindFirstDescendant(condition);
             return foundElement;
         }
 
@@ -30,26 +57,9 @@ namespace FlaUI.Adapter.White
             return parent.FindFirstDescendant(cf.ByControlType(ControlType.Window).And(cf.ByName(title))).AsWindow();
         }
 
-        public static ConditionBase AndByText(this ConditionBase condition, string text)
+        public static Window GetWindow(this Application application, string title)
         {
-            var newCondition = WhiteAdapter.ConditionFactory.ByName(text);
-            return And(condition, newCondition);
-        }
-
-        public static ConditionBase AndByClassName(this ConditionBase condition, string className)
-        {
-            var newCondition = WhiteAdapter.ConditionFactory.ByClassName(className);
-            return And(condition, newCondition);
-        }
-
-        public static AndCondition And(this ConditionBase condition, ConditionBase newCondition)
-        {
-            if (condition is AndCondition andCondition)
-            {
-                andCondition.Conditions.Add(newCondition);
-                return andCondition;
-            }
-            return new AndCondition(condition, newCondition);
+            return application.GetAllTopLevelWindows(WhiteAdapter.Automation).FirstOrDefault(x => x.Title == title);
         }
     }
 }
