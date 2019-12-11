@@ -61,5 +61,25 @@ namespace FlaUI.Adapter.White
         {
             return application.GetAllTopLevelWindows(WhiteAdapter.Automation).FirstOrDefault(x => x.Title == title);
         }
+
+        public static ListBox Check(this ListBox listBox, string itemText)
+        {
+            return listBox.SetCheck(itemText, true);
+        }
+
+        public static ListBox UnCheck(this ListBox listBox, string itemText)
+        {
+            return listBox.SetCheck(itemText, false);
+        }
+
+        private static ListBox SetCheck(this ListBox listBox, string itemText, bool isChecked)
+        {
+            var item = listBox.Items.FirstOrDefault(x => x.Text == itemText);
+            if (item != null)
+            {
+                item.IsChecked = isChecked;
+            }
+            return listBox;
+        }
     }
 }
