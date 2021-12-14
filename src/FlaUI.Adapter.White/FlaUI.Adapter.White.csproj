@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+	  <TargetFrameworks>net452;netstandard2.0;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -12,7 +13,7 @@
     <Product>FlaUI.Adapter.White</Product>
     <Authors>Roemer</Authors>
     <Description>Library that acts as an adapter for White to FlaUI.</Description>
-    <Copyright>Copyright (c) 2019-2019</Copyright>
+    <Copyright>Copyright (c) 2019-2021</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FlaUI/FlaUI.Adapter.White</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FlaUI/FlaUI.Adapter.White</RepositoryUrl>
