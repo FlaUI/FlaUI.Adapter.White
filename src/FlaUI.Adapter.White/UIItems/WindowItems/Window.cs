@@ -139,12 +139,7 @@ namespace TestStack.White.UIItems.WindowItems
                 this.GetChildren<AutomationElement>(SearchCriteria.ByControlType(ControlType.Window))
                     .FirstOrDefault(x => x.Name == title)?.FrameworkAutomationElement;
             return framework == null ? null : new Window(framework);
-        }              
-
-        public virtual void ReloadIfCached()
-        {
-            CacheRequest.ForceNoCache();           
-        }
+        } 
 
         internal static Window Instance(FrameworkAutomationElementBase frameworkAutomationElement)
         {

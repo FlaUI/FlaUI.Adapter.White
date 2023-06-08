@@ -4,6 +4,7 @@ using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using TestStack.White.UIItems.Finders;
+using FlaUI.Core.Tools;
 
 namespace TestStack.White.UIItems
 {
@@ -30,7 +31,7 @@ namespace TestStack.White.UIItems
             }
 
             var parentBoundingRect = element.Parent.BoundingRectangle;
-            var header = element.Parent.FindFirstChild((ConditionFactory cf) => cf.ByName("Top Row")
+            var header = element.Parent.FindFirstChild((ConditionFactory cf) => cf.ByName(LocalizedStrings.DataGridViewHeader)
                                                    .Or(cf.ByControlType(ControlType.Header))
                                                    .Or(cf.ByName(LocalizedStrings.DataGridViewHeader)));
 
@@ -176,10 +177,10 @@ namespace TestStack.White.UIItems
 
         private static AutomationElement GetVerticalScrollBar(this AutomationElement element)
         {
-            return element.Get(SearchCriteria.ByControlType(ControlType.ScrollBar).AndByText("Vertical Scroll Bar"))
-                ?? element.Parent.Get(SearchCriteria.ByControlType(ControlType.ScrollBar).AndByText("Vertical Scroll Bar"))
-                ?? element.Get(SearchCriteria.ByControlType(ControlType.Pane).AndByText("Vertical Scroll Bar"))
-                ?? element.Parent.Get(SearchCriteria.ByControlType(ControlType.Pane).AndByText("Vertical Scroll Bar"));
+            return element.Get(SearchCriteria.ByControlType(ControlType.ScrollBar).AndByText(LocalizedStrings.WinFormsUIA2VerticalScrollBarName))
+                ?? element.Parent.Get(SearchCriteria.ByControlType(ControlType.ScrollBar).AndByText(LocalizedStrings.WinFormsUIA2VerticalScrollBarName))
+                ?? element.Get(SearchCriteria.ByControlType(ControlType.Pane).AndByText(LocalizedStrings.WinFormsUIA2VerticalScrollBarName))
+                ?? element.Parent.Get(SearchCriteria.ByControlType(ControlType.Pane).AndByText(LocalizedStrings.WinFormsUIA2VerticalScrollBarName));
         }          
     }
 }

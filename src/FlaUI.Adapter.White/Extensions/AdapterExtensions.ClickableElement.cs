@@ -19,7 +19,7 @@ namespace TestStack.White.UIItems
                 element.FocusElement();
             }
 
-            var point = GetClickedPoint(element);
+            var point = GetClickablePoint(element);
             if (!point.IsEmpty)
             {
                 AttachedMouse.Click(point);
@@ -29,50 +29,80 @@ namespace TestStack.White.UIItems
 
         public static void RightClickElement(this AutomationElement element)
         {
-            var point = GetClickedPoint(element);
+            if (element.FrameworkAutomationElement.IsKeyboardFocusable && !element.FrameworkAutomationElement.HasKeyboardFocus)
+            {
+                element.FocusElement();
+            }
+
+            var point = GetClickablePoint(element);
             if (!point.IsEmpty)
             {
                 AttachedMouse.RightClick(point);
+                element.WaitUntilInputIsProcessed();
             }
         }
 
         public static void LeftClickElement(this AutomationElement element)
         {
-            var point = GetClickedPoint(element);
+            if (element.FrameworkAutomationElement.IsKeyboardFocusable && !element.FrameworkAutomationElement.HasKeyboardFocus)
+            {
+                element.FocusElement();
+            }
+
+            var point = GetClickablePoint(element);
             if (!point.IsEmpty)
             {
                 AttachedMouse.LeftClick(point);
+                element.WaitUntilInputIsProcessed();
             }
         }
 
         public static void DoubleClickElement(this AutomationElement element)
         {
-            var point = GetClickedPoint(element);
+            if (element.FrameworkAutomationElement.IsKeyboardFocusable && !element.FrameworkAutomationElement.HasKeyboardFocus)
+            {
+                element.FocusElement();
+            }
+
+            var point = GetClickablePoint(element);
             if (!point.IsEmpty)
             {
                 AttachedMouse.DoubleClick(point);
+                element.WaitUntilInputIsProcessed();
             }
         }
 
         public static void RightDoubleClickElement(this AutomationElement element)
         {
-            var point = GetClickedPoint(element);
+            if (element.FrameworkAutomationElement.IsKeyboardFocusable && !element.FrameworkAutomationElement.HasKeyboardFocus)
+            {
+                element.FocusElement();
+            }
+
+            var point = GetClickablePoint(element);
             if (!point.IsEmpty)
             {
                 AttachedMouse.RightDoubleClick(point);
+                element.WaitUntilInputIsProcessed();
             }
         }
 
         public static void LeftDoubleClickElement(this AutomationElement element)
         {
-            var point = GetClickedPoint(element);
+            if (element.FrameworkAutomationElement.IsKeyboardFocusable && !element.FrameworkAutomationElement.HasKeyboardFocus)
+            {
+                element.FocusElement();
+            }
+
+            var point = GetClickablePoint(element);
             if (!point.IsEmpty)
             {
-                AttachedMouse.LeftDoubleClick(point);               
+                AttachedMouse.LeftDoubleClick(point);
+                element.WaitUntilInputIsProcessed();
             }
         }
 
-        public static Point GetClickedPoint(this AutomationElement element)
+        public static Point GetClickablePoint(this AutomationElement element)
         {
             if (element == null)
             {
@@ -86,11 +116,11 @@ namespace TestStack.White.UIItems
             return point;
         }
 
-        public static Point TryGetClickedPoint(this AutomationElement element)
+        public static Point TryGetClickablePoint(this AutomationElement element)
         {
             try
             {
-                return GetClickedPoint(element);
+                return GetClickablePoint(element);
             }
             catch (Exception exception)
             {
@@ -102,7 +132,7 @@ namespace TestStack.White.UIItems
         public static void WaitUntilInputIsProcessed(this AutomationElement element)
         {
             Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(500));            
-            var clickedPoint = element.TryGetClickedPoint();
+            var clickedPoint = element.TryGetClickablePoint();
             var clickedPointX = !clickedPoint.IsEmpty ? clickedPoint.X : 0;
             var clickedPointY = !clickedPoint.IsEmpty ? clickedPoint.Y : 0;
             Retry.WhileTrue(() => AttachedMouse.IsCursorShowing(clickedPointX, clickedPointY), TimeSpan.FromMinutes(15));

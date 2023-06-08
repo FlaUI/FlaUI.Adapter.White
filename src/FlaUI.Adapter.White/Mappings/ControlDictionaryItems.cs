@@ -15,11 +15,6 @@ namespace TestStack.White.Mappings
         public virtual void AddSecondary(Type testControlType, ControlType controlType)
         {
             Add(ControlDictionaryItem.Secondary(testControlType, controlType));
-        }
-
-        public virtual void AddPrimary(Type testControlType, ControlType controlType, bool hasPrimaryChildren)
-        {
-            Add(ControlDictionaryItem.Primary(testControlType, controlType));
         } 
 
         public virtual ControlDictionaryItem[] FindBy(Type testControlType)

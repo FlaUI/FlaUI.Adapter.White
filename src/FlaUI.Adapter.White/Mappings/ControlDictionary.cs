@@ -25,7 +25,7 @@ namespace TestStack.White.Mappings
             items.AddPrimary(typeof(Tree), ControlType.Tree);
             items.AddPrimary(typeof(RadioButton), ControlType.RadioButton);
             items.AddPrimary(typeof(Table), ControlType.Table);
-            items.AddPrimary(typeof(Tab), ControlType.Tab, true);
+            items.AddPrimary(typeof(Tab), ControlType.Tab);
             items.AddPrimary(typeof(ListView), ControlType.DataGrid);
             items.AddPrimary(typeof(ToolStrip), ControlType.ToolBar);           
             items.AddPrimary(typeof(TextBox), ControlType.Edit);
