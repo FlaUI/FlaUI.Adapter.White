@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.00000.00
+MinimumVisualStudioVersion = 17.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Adapter.White", "FlaUI.Adapter.White\FlaUI.Adapter.White.csproj", "{96D28806-CDCF-4DA8-BC24-80260CC20D4A}"
 EndProject
 Global

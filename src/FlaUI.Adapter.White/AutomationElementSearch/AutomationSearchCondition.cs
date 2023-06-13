@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using FlaUI.Adapter.White;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 
-namespace FlaUI.Adapter.White
+namespace TestStack.White.AutomationElementSearch
 {
     public class AutomationSearchCondition
     {

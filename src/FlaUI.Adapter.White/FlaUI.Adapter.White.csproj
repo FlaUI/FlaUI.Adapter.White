@@ -1,34 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-	  <TargetFrameworks>net452;netstandard2.0;netcoreapp3.1;net5.0-windows</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-
-  <PropertyGroup Label="Package">
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageOutputPath>..\..\artifacts</PackageOutputPath>
-    <Version>0.1.0</Version>
-    <Product>FlaUI.Adapter.White</Product>
-    <Authors>Roemer</Authors>
-    <Description>Library that acts as an adapter for White to FlaUI.</Description>
-    <Copyright>Copyright (c) 2019-2021</Copyright>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/FlaUI/FlaUI.Adapter.White</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/FlaUI/FlaUI.Adapter.White</RepositoryUrl>
-    <PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation White Adapter FlaUI</PackageTags>
-    <IncludeSource>True</IncludeSource>
-    <IncludeSymbols>True</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FlaUI.Core" Version="3.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Label="Additional nuget files">
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
-  </ItemGroup>
-
+	<PropertyGroup>
+		<TargetFrameworks>net48;netstandard2.0;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<PropertyGroup Label="Package">
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageOutputPath>..\..\artifacts</PackageOutputPath>
+		<Version>0.2.1</Version>
+		<Product>FlaUI.Adapter.White</Product>
+		<Authors>ELCA</Authors>
+		<Description>Library that acts as an adapter for White to FlaUI.</Description>
+		<Copyright>Copyright (c) 2019-2021</Copyright>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/FlaUI/FlaUI.Adapter.White</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/FlaUI/FlaUI.Adapter.White</RepositoryUrl>
+		<PackageTags>UI Automation UIA2 UIA3 UIA System.Windows.Automation White Adapter FlaUI</PackageTags>
+		<IncludeSource>True</IncludeSource>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="FlaUI.Core" Version="4.0.0" />
+	</ItemGroup>
+	<ItemGroup Label="Additional nuget files">
+		<None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+	</ItemGroup>
 </Project>

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using FlaUI.Adapter.White;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Identifiers;
+using TestStack.White.Mappings;
 
-namespace FlaUI.Adapter.White
+namespace TestStack.White.UIItems.Finders
 {
     public class SearchCriteria
     {
@@ -30,6 +32,11 @@ namespace FlaUI.Adapter.White
             get { return new SearchCriteria(TrueCondition.Default); }
         }
 
+        public static SearchCriteria ByName(string value)
+        {
+            return new SearchCriteria(ConditionFactory.ByName(value));
+        }
+
         public static SearchCriteria ByText(string value)
         {
             return new SearchCriteria(ConditionFactory.ByText(value));
@@ -40,6 +47,11 @@ namespace FlaUI.Adapter.White
             var criteria = new SearchCriteria();
             criteria.Index = zeroBasedIndex;
             return criteria;
+        }
+
+        public static SearchCriteria ByNameOrAutomationId(string value)
+        {
+            return new SearchCriteria(ConditionFactory.ByAutomationId(value).Or(ConditionFactory.ByName(value)));
         }
 
         public static SearchCriteria ByAutomationId(string value)
@@ -55,6 +67,16 @@ namespace FlaUI.Adapter.White
         public static SearchCriteria ByControlType(ControlType controlType)
         {
             return new SearchCriteria(ConditionFactory.ByControlType(controlType));
+        }
+
+        public static SearchCriteria ByControlType(Type type)
+        {
+            var controlTypeConditions = new List<ConditionBase>();
+            foreach (var controlType in ControlDictionary.Instance.GetControlType(type))
+            {
+                controlTypeConditions.Insert(0, ConditionFactory.ByControlType(controlType));
+            }          
+            return new SearchCriteria(new OrCondition(controlTypeConditions));
         }
 
         public static SearchCriteria ByNativeProperty(PropertyId automationProperty, string value)
@@ -113,9 +135,26 @@ namespace FlaUI.Adapter.White
             return this;
         }
 
+        public virtual SearchCriteria AndControlType(Type type)
+        {
+            var controlTypeConditions = new List<ConditionBase>();
+            foreach (var controlType in ControlDictionary.Instance.GetControlType(type))
+            {
+                controlTypeConditions.Insert(0, ConditionFactory.ByControlType(controlType));
+            }
+            _conditions.Insert(0, new OrCondition(controlTypeConditions));
+            return this;
+        }
+
         public virtual SearchCriteria AndAutomationId(string id)
         {
             _conditions.Insert(0, ConditionFactory.ByAutomationId(id));
+            return this;
+        }
+
+        public virtual SearchCriteria AndProcessId(int id)
+        {
+            _conditions.Insert(0, ConditionFactory.ByProcessId(id));
             return this;
         }
 
@@ -137,7 +176,7 @@ namespace FlaUI.Adapter.White
             return this;
         }
 
-        internal ConditionBase ToCondition()
+        public ConditionBase ToCondition()
         {
             if (_conditions.Count == 1)
             {
