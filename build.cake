@@ -55,9 +55,6 @@ Task("Build")
         MSBuildFileLoggerOutput = MSBuildFileLoggerOutput.All
     });
     MSBuild(slnFile, buildSettings);
-
-    // Zip the logs
-    Zip(artifactDir, artifactDir.CombineWithFilePath("BuildLog.zip"), new [] { buildLogFile });
 });
 
 Task("Push-To-Nuget")
