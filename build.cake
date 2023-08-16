@@ -48,7 +48,6 @@ Task("Build")
     var buildLogFile = artifactDir.CombineWithFilePath("BuildLog.txt");
     var buildSettings = new MSBuildSettings {
         Verbosity = Verbosity.Minimal,
-        ToolVersion = MSBuildToolVersion.VS2019,
         Configuration = configuration,
         PlatformTarget = PlatformTarget.MSIL,
     }.AddFileLogger(new MSBuildFileLogger {
